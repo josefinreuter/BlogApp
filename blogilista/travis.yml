@@ -1,6 +1,0 @@
-deploy:
-  provider: heroku
-  api_key:
-    secure: PDEavb7p-iMXDe8b8rZLTA
-  app: blogilista
-  strategy: git
