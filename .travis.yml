@@ -5,8 +5,6 @@ env:
 - TEST_MONGODB_URI=mongodb://admin:adm1nadm1n@ds259361.mlab.com:59361/blogilistadb-test
 before_install:
 - cd ./blogilista
-before_script:
-- npm install
 script:
 - npm run test
 deploy:
