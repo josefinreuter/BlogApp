@@ -1,25 +1,21 @@
 language: node_js
 node_js:
-  - 8.11.1
-
+- 8.11.1
 before_script:
-  - cd ./blogilista
-  - npm install
-
+- cd ./blogilista
+- npm install
 env:
-  - TEST_MONGODB_URI=mongodb://admin:adm1nadm1n@ds259361.mlab.com:59361/blogilistadb-test
-  - MONGODB_URI=mongodb://admin:adm1nadm1n@ds125422.mlab.com:25422/blogilistadb-dev
-  - PORT=3001
-  - TEST_PORT=3002
-  - SECRET=salainen
-  
+- TEST_MONGODB_URI=mongodb://admin:adm1nadm1n@ds259361.mlab.com:59361/blogilistadb-test
+- MONGODB_URI=mongodb://admin:adm1nadm1n@ds125422.mlab.com:25422/blogilistadb-dev
+- PORT=3001
+- TEST_PORT=3002
+- SECRET=salainen
 script:
-  - npm run test
-
+- npm run test
 deploy:
   provider: heroku
-  api_key: 
-    secure: Y8jh5kz7Hmfudy0Mt74CEjHTK58DXeAZHffVtGHu40CfCAovprkKRjdswzeoAUWhVEgpXhNfxafpsurBZaXzO818mZTGp2oMCQZesNfoxvYnaXaJ6sfDndaJrUAlP0TsK8fUurUjsMts74WO718aS7oR8tg
+  api_key:
+    secure: lhdkmyQm3lU5tkZVmIYyFJ4qHBiP4kgBReU3xHGaMa0Brn+MiIMmJP5ET1vFVo4q5nkmaZOyQp/pTZGPpx6KC8Ed8MyKIG20jcPU2V/kt18QVqiw9uL+QICGl8vojLh8+BzDcW+C/khuVt8geV3GMR9SIBmMVLJfwwSKndaapZRQDZFiVSHfOCeVSgwqh2tkzPtFzqW8v/zaBaPxhOxK9Blc+o4qaukJQYGg1G4L8tgpekIci+S9Lre/JtkszhFe5yTsNY1L4aYSQcNwMg8bjUMKO3/CQjQaSxOP+E/i83ueZVQq+cyuQeu0VFLRb49VCYfBeRf8/hdnX2yJ1EizqdKIpiHCG0DJrjdVmna+HtIK9Ccoz95HOa0TKZzdm1bZZQz0keZiM+v17qiJR7Zw/58m9pQ2fAFX5kNezU9rtXVkjl9/jBKVM3vqkL4wyYaihcb6HDl/QArMEBUYF+vJhq/awNEVcFXATzZDBptS8irp1BPTNzWH42p+fUpAT+9zLyI/Ph8s5crF8hE8nqbwPGURvzq8ciE3BdmZlOYoalfQQd19wJRMNo7xjvP6S3halIAGwLeMJELN0mkm6ecQ7RlVKLlXzYgNMlQifme1TO7Bcv8/OIGfckvTba1FPp55siqcKBWgC16ISXkUpUq0WLiQ0flstLY0wKSuBpvAH0w=
   app: blogilista
   on:
     repo: josefinreuter/BlogApp
