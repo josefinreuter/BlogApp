@@ -1,10 +1,15 @@
 language: node_js
 node_js:
   - 8.11.1
+
+before_deploy:
+  - cd ./blogilista
+  
 install:
   - npm install
 script:
   - npm test
+
 deploy:
   provider: heroku
   api_key: Y8jh5kz7Hmfudy0Mt74CEjHTK58DXeAZHffVtGHu40CfCAovprkKRjdswzeoAUWhVEgpXhNfxafpsurBZaXzO818mZTGp2oMCQZesNfoxvYnaXaJ6sfDndaJrUAlP0TsK8fUurUjsMts74WO718aS7oR8tg
