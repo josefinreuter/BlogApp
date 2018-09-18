@@ -2,7 +2,9 @@ language: node_js
 node_js:
 - 8.11.1
 env:
-- TEST_MONGODB_URI=mongodb://admin:adm1nadm1n@ds259361.mlab.com:59361/blogilistadb-test
+  global:
+   - TEST_MONGODB_URI=mongodb://admin:adm1nadm1n@ds259361.mlab.com:59361/blogilistadb-test
+   - SECRET=salainen
 before_install:
 - cd ./blogilista
 script:
