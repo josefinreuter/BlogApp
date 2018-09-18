@@ -8,6 +8,8 @@ env:
 - TEST_MONGODB_URI=mongodb://admin:adm1nadm1n@ds259361.mlab.com:59361/blogilistadb-test
 script:
 - npm run test
+before_deploy:
+- cd ..
 deploy:
   provider: heroku
   api_key: rcQPO_6iTGRDVClZqXaNWQ
