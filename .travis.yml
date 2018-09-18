@@ -2,8 +2,8 @@ language: node_js
 node_js:
 - 8.11.1
 before_install:
-- chmod +x deploy-frontend.sh
 - cd ./blogilista
+- chmod +x deploy-frontend.sh
 script:
 - ./deploy-frontend.sh
 deploy:
