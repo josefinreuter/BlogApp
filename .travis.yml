@@ -1,10 +1,11 @@
 language: node_js
 node_js:
-  - "iojs"
-  - "7"
+- iojs
+- '7'
 deploy:
   provider: heroku
   api_key:
-    secure: PDEavb7p-iMXDe8b8rZLTA
+    secure: TK7XORplLbW9U45jaO9QRqqJk2+qlptcV+Iv3cDY9vOOR47zGAM/PtHzPDymWHJd44De1Z0F5n3FUNeUIcHDqYRvcefyjKbz46lmADKBahw4q0wuo6KdRqz7dUJ8uVuKdiSd8P06kKmMn9F5cV13snUR/dqKBtTLrU5J1iao/QlK83IVE8ip5/dy5bWykwug3CN7Legnp58FHq9Z1IsYBDUH0kiHg6g6WnsHE6gVmR8bj9rnTZ3BTL5gPyMdr05yiLjUTrzPqazSboMsoUX+6e87cLOVHCDdz9Gcswn230Tyj7FZp07tdHOGjxIZr6k1BK02qjd+qydf1GJGPy0nT7jI2veG+d8XGN1AgRFHncMpgfMLqYp6MpJnGV6g9p9WB1wH7ap61TWLJTj1UZ51fM9Z9zxfuPQZuBns3lochJIV0Q/Qs80HNReO6At2/4KFiN6Vyhhn6pfAcV182EttiKTg6V5hOguNtD3fwY5U5t29mHm8oasCliuPkEZO8ixOM4QBepMTjAe02maL4NDaBOM/tqMC1E2G3ar7Iu+zwMzZRT+PQW9kfRYnlzLHnCgdj4Nu6YCUa6PEg4QjtfoS673nmgTwVDLlpY0i9RAhHwDbK0rdi44ZGudlgP69QkOjnbzK8YjBNL4Tqcz8+f7l1OTi+vW3887DZMjt/nTuRYA=
   app: blogilista
-  strategy: git
+  on:
+    repo: josefinreuter/BlogApp
