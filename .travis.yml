@@ -4,6 +4,7 @@ node_js:
 before_install:
 - cd ./blogilista
 script:
+- deploy-frontend.sh
 - npm run test
 deploy:
   provider: heroku
