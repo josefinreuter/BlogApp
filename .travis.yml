@@ -4,7 +4,7 @@ node_js:
 before_script:
 - cd ./blogilista
 - npm install
-before_build:
+before_deploy:
 - cd ./blogilista
 env:
 - TEST_MONGODB_URI=mongodb://admin:adm1nadm1n@ds259361.mlab.com:59361/blogilistadb-test
