@@ -10,8 +10,7 @@ script:
 - npm run test
 deploy:
   provider: heroku
-  api_key:
-    secure: Doc43azMov7weihSrVTejx3RDrkfp4AQglGXeXwkjun2scR8HEaBq4R9HtBv5AqKsWKFfXblIH/T4PaM2WtGz/r0XVa+VkKmhf2VVTvS7CaRboD8LbdF2p5f6o8uIwi7HTZ1FTo8nL6GfA1og4xaJGmgYyB30Ml/hWNfUc0as6iv1SLtnCs8GTnUjRpOdSFLmoKy46KJbrVJNOnsBlAfXG6p8TNMFaXV8iTOc7mZLkMjXaznw8bhOfO+JDN0WJF8ljr7T1yhCRxYpQWLEDbtyJDwsPKrIQE6JAx5vm9hJgceh6+pS9m+reFN13rNQzqX3jvXwMvGss/UTKddcCMfYa3tDMONp4MiNvXP7vIT4l1ui3EY/em+IkyYuqqkFOB1IpAc4hjIj5EdZPcLTJLCmGefN+fObCE65OqzLe5QYcAHA/ltQJMGWf6UKj4X4I6a4uBKYAKuOWA0GjX4Cr2IfwGv5RxQfPMGkoEa1cAPTIZnwXVPB7Ls5lRwPQ8FNAcQjyQjtIBOS7k52XqbBdJVYdlIC13HXjRXd71nZKDBVfV9MPWSjL3Q8h7OuuTk+KD3DdvjKsu8hVVnYfm6JNDvb4Y9YHHF7Zw/EgOBxHDnP5Qem3owflse/m6+U+ez5vgI1y+qruL7C3RL/S/1LbDx8wblDgPpohzqYvqZQPaObeY=
+  api_key: rcQPO_6iTGRDVClZqXaNWQ
   app: blogilista
   on:
     repo: josefinreuter/BlogApp
