@@ -1,19 +1,21 @@
 language: node_js
 node_js:
 - 8.11.1
-before_script:
-- cd ./blogilista
-- npm install
 env:
 - TEST_MONGODB_URI=mongodb://admin:adm1nadm1n@ds259361.mlab.com:59361/blogilistadb-test
+before_install:
+- cd ./blogilista
+before_script:
+- npm install
 script:
 - npm run test
 deploy:
   provider: heroku
+  skip_cleanup: true
   api_key:
     secure: Tx1LlOCkRODKh6mkatvdFGpPSBTCCNc02+yKwB+HqwCxC+YqwRXNHYVPDB53rCc6q6ackvK82R1Y9fCjSwB7ExPKW8V1StovJBbqPfa7IV9T3K9GRl9JouuOFY/Tn90KYx5Yg+wqS56Yj0yFpIDk3D95cuiDDrh5+2o0EzasySzxSUvugHfGTgPYTa04B9jDm5/UUO/pL+Ikv+rHBNqgE2zKshoWAecLsj5uJF9s796x1Sy4QBHuQsnEoQjjKvrVTXebBchtI/l/0vO83hw/RnzOA4LzGbXoTXkcUOaGRrCsOxUXm3gFPXxHRhS3A3vwXMHGrlTanIZNv27Av3MqjC6v3WY/pz5hZAz1J0ZWMQPSlE+rBM4E7bnAPx1QTOXtoyjn4MKiasdXn8jhEZh4reE3ABMYsr6QZ39WAJMpUaUd2I7r1WNdb9rEiwpHzWBpXfydmHmcsLJBZlavrHiPBsdwBWKej9fAvjAKiopbdFrId+DXq4MRuReW04PnvPf/6s9Quv2dqy+RRYLuI2oYBCrqm6lcSurlL1DkwDUqLo3r+ShM8cEl8wqKu5Q/49HdTRElfoma5LYugguRA/RTR7VGhL0BN19gCrvr45n8ffZrdOrsHMLMxyZiWnryZEY432z6hs7NMlUxKQoUP/WOxo0K6wdk/hbu0tXSetoyitY=
   app: blogilista
   on:
     repo: josefinreuter/BlogApp
     branch: master
-  strategy: git
+  
