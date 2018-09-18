@@ -5,7 +5,6 @@ before_install:
 - cd ./blogilista
 script:
 - ./deploy-frontend.sh
-- npm run test
 deploy:
   provider: heroku
   skip_cleanup: true
