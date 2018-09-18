@@ -4,7 +4,7 @@ const api = supertest(app)
 const User = require('../models/user')
 const {usersInDb} = require('./tests_helper')
 
-describe('when there is one initial user saved', async () => {
+describe.skip('when there is one initial user saved', async () => {
     beforeAll(async () => {
         await User.remove({})
         const user = new User({username: 'root', name: 'Admin', password: 'hemligt', adult: false})
