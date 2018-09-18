@@ -4,14 +4,8 @@ node_js:
 before_script:
 - cd ./blogilista
 - npm install
-before_deploy:
-- cd ./blogilista
 env:
 - TEST_MONGODB_URI=mongodb://admin:adm1nadm1n@ds259361.mlab.com:59361/blogilistadb-test
-- MONGODB_URI=mongodb://admin:adm1nadm1n@ds125422.mlab.com:25422/blogilistadb-dev
-- PORT=3001
-- TEST_PORT=3002
-- SECRET=salainen
 script:
 - npm run test
 deploy:
