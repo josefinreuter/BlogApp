@@ -6,6 +6,7 @@ before_install:
 - chmod +x deploy-frontend.sh
 script:
 - ./deploy-frontend.sh
+- npm run test
 deploy:
   provider: heroku
   skip_cleanup: true
