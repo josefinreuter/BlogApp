@@ -4,6 +4,10 @@ import { setUser } from './reducers/userReducer'
 import Notification from './components/Notification'
 import LoginForm from './components/LoginForm';
 import Blogs from './components/Blogs';
+import Users from './components/Users';
+import { HashRouter, Route } from 'react-router-dom'
+import Header from './components/Header';
+
 
 class App extends Component {
     
@@ -15,23 +19,32 @@ class App extends Component {
             this.props.setUser(user)          
         }
     }
-
-
     render() {
+       
         return (
-            <div className="app">
+            <HashRouter>
+                <div className="app">
                 <Notification/>
                 {this.props.user === null ?
-                    <LoginForm/> : <Blogs/>
+                    <Route exact path="/" render={() => <LoginForm/>}></Route>
+                    : 
+                    <div>
+                    <Header/>
+                    <Route exact path="/" render={() => <Blogs/>}></Route>
+                    <Route exact path="/users" render={() => <Users/>}></Route>
+                    </div>
                 }
-            </div>
+                
+                </div>
+            </HashRouter>
         )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user
+        user: state.user,
+        visible: state.visible
     }
   }
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { addBlog } from '../reducers/blogReducer'
+import { toggle } from '../reducers/visibilityReducer'
  
 
 class BlogForm extends Component {
@@ -15,6 +16,7 @@ class BlogForm extends Component {
         event.target.title.value = ''
         event.target.author.value = ''
         event.target.url.value = ''
+        this.props.toggle(this.props.visible)
     }
 
     
@@ -61,8 +63,13 @@ class BlogForm extends Component {
     newUrl: PropTypes.string.isRequired
 } */
 
+const mapStateToProps = (state) => {
+    return {
+        visible: state.visible
+    }
+  }
 
 export default connect(
-    null,
-    { addBlog }
+    mapStateToProps,
+    { addBlog, toggle }
 ) (BlogForm)

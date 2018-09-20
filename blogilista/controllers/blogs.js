@@ -28,7 +28,7 @@ blogsRouter.post('/', async (request, response) => {
             return response.status(401).json({error: 'token missing or invalid'})
         }
 
-        if (body.title === undefined || body.url === undefined) {
+        if (body.title === undefined || '' === body.title.trim() || body.url === undefined || '' === body.url.trim()) {
             return response.status(400).json({error: 'title or url missing'})
         }
 
