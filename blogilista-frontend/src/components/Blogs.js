@@ -1,40 +1,32 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { initialize } from '../reducers/blogReducer'
-
-import Blog from './Blog'
+import { NavLink } from 'react-router-dom'
 
 
 class Blogs extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            visible: false
-        }
-    }
-
-
-    componentDidMount = async () => {
-        this.props.initialize()
-    }
-
     
     render() {
         const blogs = this.props.blogs.sort(function (a, b) {
             return (b.likes > a.likes) ? 1 : ((a.likes > b.likes) ? -1 : 0);
         })
+
+        const blogStyle = {
+            paddingTop: 5,
+            paddingLeft: 2,
+            border: 'solid',
+            borderWidth: 1,
+            marginBottom: 10
+        }
        
-
-
         return (
 
             <div>
                 <h3>Existing blogs: </h3>
                 {blogs.map(blog =>
-                    <Blog key={blog.id} blog={blog}/>)}
-                <br/>   
-                 
-
+                    <div style={blogStyle} key={blog.id}>
+                    <NavLink to={`/blogs/${blog.id}`}>{blog.title}, {blog.author}</NavLink>
+                    <br/>
+                    </div>)}
             </div>
         )
     }
@@ -47,6 +39,5 @@ const mapStateToProps = (state) => {
   }
 
 export default connect(
-    mapStateToProps,
-    { initialize }
+    mapStateToProps
 ) (Blogs)

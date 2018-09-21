@@ -1,4 +1,5 @@
 const http = require('http')
+const path = require('path');
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
@@ -28,6 +29,9 @@ app.use(middleware.tokenExtractor)
 app.use('/api/login', loginRouter)
 app.use('/api/blogs', blogsRouter)
 app.use('/api/users', usersRouter)
+/* app.get('*', function response(req, res) {
+    res.sendFile(path.join(__dirname, '/build/index.html'));
+}); */
 
 const server = http.createServer(app)
 

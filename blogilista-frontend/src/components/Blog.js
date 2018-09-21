@@ -1,59 +1,60 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { likeBlog, deleteBlog } from '../reducers/blogReducer'
+import { likeBlog, deleteBlog, commentOnBlog } from '../reducers/blogReducer'
 
 class Blog extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            visible: false,
-        }
-    }
-
-    toggleVisibility = () => {
-        this.setState({visible: !this.state.visible})
-    }
-
+ 
     likeBlog = async (id) => {
         this.props.likeBlog(id, this.props.blogs)
     }
 
-    deleteBlog = async (id) => {
-       this.props.deleteBlog(id, this.props.blogs)
+    deleteBlog = async (blog) => {
+    if (window.confirm(`Delete '${blog.title}'?`)) {
+       this.props.deleteBlog(blog.id, this.props.blogs)
+       this.props.history.push('/')
+        }
+    }
+
+    addComment = async (event, blog) => {
+        event.preventDefault()
+        this.props.commentOnBlog(event.target.comment.value, blog)
+        event.target.comment.value = ''
+        
+    }
+
+    mapToId = (id) =>  {
+        return this.props.blogs.find(blog => blog.id === String(id))
     }
 
     render() {
-
-        const blogStyle = {
-            paddingTop: 5,
-            paddingLeft: 2,
-            border: 'solid',
-            borderWidth: 1,
-            marginBottom: 10
-        }
-
+        const blog = this.mapToId(this.props.match.params.id)
         return (
-            <div style={blogStyle}>
-                <div>
-                    {this.state.visible ?
-                        <div className="allContent">
-                            <span
-                                onClick={this.toggleVisibility}>{this.props.blog.title}, {this.props.blog.author} </span>
+            <div>
+                {blog === undefined ? '' :  <div>
+                            <h3>{blog.title}, {blog.author} </h3>
+                            <a href={blog.url}>{blog.url}</a>
                             <br/>
-                            <a href={this.props.blog.url}>{this.props.blog.url}</a>
+                            {blog.likes} likes
+                            <button onClick={() => this.likeBlog(blog.id)}>Like</button>
                             <br/>
-                            {this.props.blog.likes} likes
-                            <button onClick={() => this.likeBlog(this.props.blog.id)}>Like</button>
+                            added by {blog.user === undefined ? 'anonymous' : blog.user.name}
                             <br/>
-                            added by {this.props.blog.user === undefined ? 'anonymous' : this.props.blog.user.name}
-                            <br/>
-                            {(this.props.blog.user === undefined || this.props.blog.user.username === this.props.user.username) ?
-                                <button onClick={() => this.deleteBlog(this.props.blog.id)}>Delete</button> : ''}
-                        </div>
-                        : <div onClick={this.toggleVisibility}
-                               className="initialContent"> {this.props.blog.title}, {this.props.blog.author}</div>}
-
-                </div>
+                            {(blog.user === undefined || blog.user.username === this.props.user.username) ?
+                                <button onClick={() => this.deleteBlog(blog)}>Delete</button> : ''}
+                            <h4>Comments:</h4>
+                            {blog.comments !== null ?
+                                <ul>
+                                {blog.comments.map(comment => <li key={comment._id}>{comment.comment}</li>)}
+                            </ul>
+                            : ''}   
+                            <form onSubmit={(event) => this.addComment(event, blog)}>
+                                <input
+                                    type="text"
+                                    name="comment"                        
+                                 />
+                                <button type="submit">Add comment</button>
+                            </form>
+                        </div>}
             </div>
         )
     }
@@ -68,5 +69,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
     mapStateToProps,
-    { likeBlog, deleteBlog }
+    { likeBlog, deleteBlog, commentOnBlog }
 ) (Blog)

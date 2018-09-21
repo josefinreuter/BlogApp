@@ -39,6 +39,7 @@ blogsRouter.post('/', async (request, response) => {
             author: body.author,
             url: body.url,
             likes: body.likes === undefined ? 0 : body.likes,
+            comments: [],
             user: user._id
         })
 
@@ -60,6 +61,33 @@ blogsRouter.post('/', async (request, response) => {
     }
 })
 
+blogsRouter.post('/:id/comments', async (request, response) => {
+    try {
+    const body = request.body
+
+    if (body.comment === undefined || '' === body.comment.trim() ) {
+        return response.status(400).json({error: 'Comment is empty'})
+    }
+
+    const blog = await Blog.findById(request.params.id)
+    
+    if(blog.comments !== null) {
+        blog.comments = blog.comments.concat({comment: body.comment})
+    } else {
+        blog.comments = [{comment: body.comment}]
+    }
+    
+    const updated = await blog.save()
+
+    response.json(Blog.format(updated))
+
+    } catch (e) {
+        console.log(e)
+        response.status(400).send({error: 'malformatted id'})
+    }
+
+})
+
 blogsRouter.put('/:id', async (request, response) => {
     try {
         const body = request.body
@@ -68,7 +96,8 @@ blogsRouter.put('/:id', async (request, response) => {
             title: body.title,
             author: body.author,
             url: body.url,
-            likes: body.likes
+            likes: body.likes,
+            comments: body.comments
         }
 
         const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, {new: true})

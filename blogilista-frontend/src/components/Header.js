@@ -4,6 +4,7 @@ import { toggle } from '../reducers/visibilityReducer'
 import { logout } from '../reducers/userReducer'
 import { notify } from '../reducers/notificationReducer'
 import BlogForm from './BlogForm'
+import { NavLink } from 'react-router-dom'
 
 
 
@@ -14,7 +15,7 @@ class Header extends React.Component {
         window.localStorage.clear()
         this.props.notify(`${this.props.user.name} logged out`)
         this.props.logout()
-        
+        this.props.history.push('/')        
     }
 
     toggleVisibility = () => {
@@ -24,9 +25,12 @@ class Header extends React.Component {
   render() {
     const hideWhenVisible = {display: this.props.visible ? 'none' : ''}
     const showWhenVisible = {display: this.props.visible ? '' : 'none'}
+    
     return (
       <div>
           <h2>Blogs</h2>
+          <NavLink exact to='/' activeStyle={{fontWeight: 'bold'}}>HOME</NavLink> <span> | </span> 
+          <NavLink exact to='/users' activeStyle={{fontWeight: 'bold'}}>USERS</NavLink>
                     <p>{this.props.user.name} is logged in. <button onClick={this.logout}>Logout</button></p>
                     <div style={hideWhenVisible}>
                     <button onClick={this.toggleVisibility}>New Blog</button>

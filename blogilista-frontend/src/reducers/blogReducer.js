@@ -9,7 +9,9 @@ const blogReducer = (store = [], action) => {
     return action.data
   case 'LIKE':
     return action.data
-    case 'DELETE':
+  case 'COMMENT':
+    return action.data  
+  case 'DELETE':
     return action.data
   default:
     return store
@@ -67,6 +69,37 @@ export const addBlog = (title, author, url) => {
       
     }
   }
+  export const commentOnBlog = (comment, blog) => {
+    return async (dispatch) => {
+        try {
+
+            await blogService.commentBlog(blog.id, {comment: comment})
+
+
+            const blogs = await blogService.getAll()
+
+
+            dispatch({
+                type: 'COMMENT',
+                data: blogs
+              })
+
+            dispatch({
+                type: 'NOTIFICATION',
+                notification: `Comment ${comment} was added to ${blog.title}`
+            })
+            clearNotification(dispatch)
+
+        } catch (e) {
+            dispatch( {
+                type: 'NOTIFICATION',
+                notification: 'Comment addition failed, comment cannot be empty'
+            })
+            clearNotification(dispatch)
+
+        }
+    }
+  }
 
   export const likeBlog = (id, oldBlogs) => {
     return async (dispatch) => {
@@ -109,7 +142,7 @@ export const addBlog = (title, author, url) => {
         try {
             const blog = oldBlogs.find(b => b.id === id)
 
-            if (window.confirm(`Delete '${blog.title}'?`)) {
+           
                 await blogService.deleteBlog(id)
 
                 const blogs = oldBlogs.filter(b => b.id !== id)
@@ -125,7 +158,7 @@ export const addBlog = (title, author, url) => {
                 })
                 clearNotification(dispatch)
                 
-            }
+            
         } catch (e) {
             dispatch( {
                 type: 'NOTIFICATION',

@@ -1,16 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 import { getAllUsers } from '../reducers/userlistReducer'
-import User from './User';
+
+
 
 class Users extends React.Component {
-  
-    componentDidMount = async () => {
-        this.props.getAllUsers()
-    }
-
     
-  
+   componentDidMount = async () => {
+    this.props.getAllUsers() 
+   }
+
     render() {
    
     return (
@@ -23,7 +23,10 @@ class Users extends React.Component {
                     <th>Blogs</th>
                 </tr>
                {this.props.users.map(user => 
-                <User key={user.id} user={user}/>)}
+                 <tr key={user.id}>
+                 <td><NavLink to={`/users/${user.id}`}>{user.name}</NavLink></td>
+                 <td>{user.blogs.length}</td>
+             </tr>)}
             </tbody>
         </table>
       </div>
