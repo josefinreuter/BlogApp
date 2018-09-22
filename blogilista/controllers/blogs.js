@@ -129,6 +129,12 @@ blogsRouter.delete('/:id', async (request, response) => {
             return response.status(400).send({error: 'not allowed to delete other users entries'})
         }
 
+        const user = await User.findById(decodedToken.id)
+
+        user.blogs.splice(user.blogs.indexOf(blog._id), 1);
+        console.log(user.blogs)
+        await user.save()
+
         await Blog.findByIdAndRemove(blog._id)
         response.status(204).end()
 
