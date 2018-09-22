@@ -4,6 +4,10 @@ import { login } from '../reducers/userReducer'
 import { notify } from '../reducers/notificationReducer'
 import { initialize } from '../reducers/blogReducer'
 import { getAllUsers } from '../reducers/userlistReducer'
+import { Navbar, FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
+import { NavLink } from 'react-router-dom'
+import Notification from './Notification'
+
 
 class LoginForm extends Component {
 
@@ -19,26 +23,29 @@ class LoginForm extends Component {
     render() {
         return(
             <div className="loginForm">
-            <h2>Login</h2>
-
-            <form onSubmit={this.login}>
-                <div>
-                    Username:
-                    <input
-                        type="text"
-                        name="username"
-                    />
-                </div>
-                <div>
-                    Password:
-                    <input
-                        type="password"
-                        name="password"
-                        />
-                </div>
-                <button type="submit">Login</button>
-            </form>
-        </div>
+                <Navbar inverse collapseOnSelect>
+                    <Navbar.Header >
+                        <Navbar.Brand><NavLink exact to='/'>Blog App</NavLink></Navbar.Brand>
+                    </Navbar.Header>
+                 </Navbar>
+                <Notification/>
+                 <h2>Login</h2>
+                <form onSubmit={this.login}>
+                    <FormGroup>
+                        <ControlLabel> Username: </ControlLabel>
+                            <FormControl
+                            type="text"
+                            name="username"
+                            />
+                        <ControlLabel>Password:</ControlLabel>
+                            <FormControl
+                            type="password"
+                            name="password"
+                            />
+                        <Button type="submit">Login</Button>
+                    </FormGroup>
+                </form>
+            </div>
         )
     }
 }

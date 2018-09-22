@@ -1,12 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { toggle } from '../reducers/visibilityReducer'
 import { logout } from '../reducers/userReducer'
 import { notify } from '../reducers/notificationReducer'
-import BlogForm from './BlogForm'
 import { NavLink } from 'react-router-dom'
-
-
+import { Navbar, Nav, NavItem, Button } from 'react-bootstrap'
+import Notification from './Notification'
 
 class Header extends React.Component {
 
@@ -18,29 +16,30 @@ class Header extends React.Component {
         this.props.history.push('/')        
     }
 
-    toggleVisibility = () => {
-        this.props.toggle(this.props.visible)
-    }
     
   render() {
-    const hideWhenVisible = {display: this.props.visible ? 'none' : ''}
-    const showWhenVisible = {display: this.props.visible ? '' : 'none'}
+
+    const linkStyle = {
+        textDecoration: 'none',
+        color: 'white'
+    }
     
     return (
       <div>
-          <h2>Blogs</h2>
-          <NavLink exact to='/' activeStyle={{fontWeight: 'bold'}}>HOME</NavLink> <span> | </span> 
-          <NavLink exact to='/users' activeStyle={{fontWeight: 'bold'}}>USERS</NavLink>
-                    <p>{this.props.user.name} is logged in. <button onClick={this.logout}>Logout</button></p>
-                    <div style={hideWhenVisible}>
-                    <button onClick={this.toggleVisibility}>New Blog</button>
-                </div>
-                <div style={showWhenVisible}>
-                    <BlogForm/>
-                    <br/>
-                    <button onClick={this.toggleVisibility}>Cancel</button>
-                </div>
-       
+        <Navbar inverse collapseOnSelect>
+            <Navbar.Header >
+                <Navbar.Brand><NavLink exact to='/'>Blog App</NavLink></Navbar.Brand>
+                <Navbar.Toggle />
+            </Navbar.Header>
+            <Navbar.Collapse>
+                <Nav>
+                    <NavItem href="#"> <NavLink exact to='/' style={linkStyle}>HOME</NavLink></NavItem>
+                    <NavItem href="#"> <NavLink exact to='/users' style={linkStyle}>USERS</NavLink></NavItem>
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>
+        <p>{this.props.user.name} is logged in. <Button onClick={this.logout}>Logout</Button></p>
+        <Notification/>            
       </div>
     )
   }
@@ -50,11 +49,10 @@ const mapStateToProps = (state) => {
   return {
     notification: state.notification,
     user: state.user,
-    visible: state.visible
   }
 }
 
 export default connect(
   mapStateToProps,
-  { toggle, logout, notify }
+  { logout, notify }
 )(Header)

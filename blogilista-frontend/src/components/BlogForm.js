@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 import { addBlog } from '../reducers/blogReducer'
 import { toggle } from '../reducers/visibilityReducer'
+import { FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
+
  
 
 class BlogForm extends Component {
@@ -25,43 +26,30 @@ class BlogForm extends Component {
         <div>
             <h3>Add new blog</h3>
             <form onSubmit={this.addBlog}>
-                <div>
-                    Title:
-                    <input
-                        type="text"
-                        name="title"                        
-                    />
-                </div>
-                <div>
-                    Author:
-                    <input
-                        type="text"
-                        name="author"                       
-                    />
-                </div>
-                <div>
-                    url:
-                    <input
-                        type="text"
-                        name="url"
-                    />
-                </div>
-                <br/>
-                <button type="submit">Add</button>
+                <FormGroup>
+                    <ControlLabel>Title:</ControlLabel>
+                        <FormControl
+                            type="text"
+                            name="title"                        
+                        />
+                    <ControlLabel>Author:</ControlLabel>
+                        <FormControl
+                            type="text"
+                            name="author"                       
+                        />
+                    <ControlLabel>Website:</ControlLabel>
+                         <FormControl
+                            type="text"
+                            name="url"
+                        />
+                    <Button type="submit">Add</Button>
+                </FormGroup>
             </form>
 
         </div>
     )
     }
 }
-
-/* BlogForm.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-    handleFormChange: PropTypes.func.isRequired,
-    newTitle: PropTypes.string.isRequired,
-    newAuthor: PropTypes.string.isRequired,
-    newUrl: PropTypes.string.isRequired
-} */
 
 const mapStateToProps = (state) => {
     return {

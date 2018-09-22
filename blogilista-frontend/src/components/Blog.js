@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { likeBlog, deleteBlog, commentOnBlog } from '../reducers/blogReducer'
+import { ListGroup, ListGroupItem, Button, FormControl, Well, Table } from 'react-bootstrap';
+
 
 class Blog extends Component {
  
@@ -30,30 +32,43 @@ class Blog extends Component {
         const blog = this.mapToId(this.props.match.params.id)
         return (
             <div>
-                {blog === undefined ? '' :  <div>
-                            <h3>{blog.title}, {blog.author} </h3>
-                            <a href={blog.url}>{blog.url}</a>
-                            <br/>
-                            {blog.likes} likes
-                            <button onClick={() => this.likeBlog(blog.id)}>Like</button>
-                            <br/>
-                            added by {blog.user === undefined ? 'anonymous' : blog.user.name}
-                            <br/>
-                            {(blog.user === undefined || blog.user.username === this.props.user.username) ?
-                                <button onClick={() => this.deleteBlog(blog)}>Delete</button> : ''}
+                {blog === undefined ? '' :  
+                    <div>
+                        <h3>{blog.title} by {blog.author} </h3>
+                            <Table bordered condensed>
+                                <tbody>
+                                    <tr>
+                                        <td>Website:</td>
+                                        <td><a target="_blank" href={"http://" + blog.url}>{blog.url}</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Likes:</td>
+                                        <td>{blog.likes} likes 
+                                        <Button bsSize="small" onClick={() => this.likeBlog(blog.id)}>Like</Button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Added by:</td>
+                                        <td> {blog.user === undefined ? 'anonymous' : blog.user.name}</td>
+                                    </tr>
+                                </tbody>
+                            </Table>
                             <h4>Comments:</h4>
                             {blog.comments !== null ?
-                                <ul>
-                                {blog.comments.map(comment => <li key={comment._id}>{comment.comment}</li>)}
-                            </ul>
-                            : ''}   
+                                <ListGroup>{blog.comments.map(comment => 
+                                    <ListGroupItem key={comment._id}>{comment.comment}</ListGroupItem>)}
+                                </ListGroup>
+                            :   <Well>No comments yet!</Well>}   
                             <form onSubmit={(event) => this.addComment(event, blog)}>
-                                <input
+                                <FormControl
                                     type="text"
                                     name="comment"                        
                                  />
-                                <button type="submit">Add comment</button>
+                                <Button type="submit">Add comment</Button>
                             </form>
+                            <br/>
+                            <br/>
+                            {(blog.user === undefined || blog.user.username === this.props.user.username) ?
+                            <Button onClick={() => this.deleteBlog(blog)}>Delete blog</Button> : ''}
                         </div>}
             </div>
         )

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import { setUser } from './reducers/userReducer'
-import Notification from './components/Notification'
 import LoginForm from './components/LoginForm';
 import Blogs from './components/Blogs';
 import Blog from './components/Blog';
@@ -25,13 +24,10 @@ class App extends Component {
             this.props.getAllUsers()        
         }
     }
-    render() {      
-       
+    render() {            
         return (
-            
             <HashRouter>
                 <div className="app">
-                <Notification/>
                 {this.props.user === null ?
                     <Route exact path="/" render={() => <LoginForm/>}></Route>
                     : 

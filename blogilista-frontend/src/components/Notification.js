@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Alert } from 'react-bootstrap'
 
 class Notification extends React.Component {
   render() {
@@ -7,7 +8,7 @@ class Notification extends React.Component {
       <div>
         { this.props.notification === '' ?
           '' :
-          <div>{this.props.notification}</div> }
+          <Alert>{this.props.notification}</Alert> }
       </div>
     )
   }

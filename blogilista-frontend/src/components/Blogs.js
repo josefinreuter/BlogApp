@@ -1,32 +1,52 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import { toggle } from '../reducers/visibilityReducer'
+import BlogForm from './BlogForm'
+import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
+
+
 
 
 class Blogs extends Component {
+
+
+    toggleVisibility = () => {
+        this.props.toggle(this.props.visible)
+    }
     
     render() {
         const blogs = this.props.blogs.sort(function (a, b) {
             return (b.likes > a.likes) ? 1 : ((a.likes > b.likes) ? -1 : 0);
         })
 
+        const hideWhenVisible = {display: this.props.visible ? 'none' : ''}
+        const showWhenVisible = {display: this.props.visible ? '' : 'none'}
+    
+
         const blogStyle = {
-            paddingTop: 5,
-            paddingLeft: 2,
-            border: 'solid',
-            borderWidth: 1,
-            marginBottom: 10
+            textDecoration: 'none'
         }
        
         return (
 
             <div>
                 <h3>Existing blogs: </h3>
-                {blogs.map(blog =>
-                    <div style={blogStyle} key={blog.id}>
-                    <NavLink to={`/blogs/${blog.id}`}>{blog.title}, {blog.author}</NavLink>
+                <ListGroup>
+                    {blogs.map(blog =>
+                        <ListGroupItem href="#" key={blog.id}>
+                            <NavLink style={blogStyle} to={`/blogs/${blog.id}`}>{blog.title}, {blog.author}</NavLink>
+                        </ListGroupItem>)}
+                </ListGroup>
+                <div style={hideWhenVisible}>
+                    <Button onClick={this.toggleVisibility}>New Blog</Button>
+                </div>
+                <div style={showWhenVisible}>
+                    <BlogForm/>
                     <br/>
-                    </div>)}
+                    <Button onClick={this.toggleVisibility}>Cancel</Button>
+                </div>
+       
             </div>
         )
     }
@@ -34,10 +54,12 @@ class Blogs extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        blogs: state.blogs
+        blogs: state.blogs,
+        visible: state.visible
     }
   }
 
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    { toggle }
 ) (Blogs)
